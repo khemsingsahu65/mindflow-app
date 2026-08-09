@@ -25,11 +25,14 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Make Gradle executable
+        run: chmod +x android/gradlew || true
+
       - name: Get dependencies
         run: flutter pub get
 
       - name: Build AAB
-        run: flutter build aab --release
+        run: flutter build aab --release --no-tree-shake-icons
 
       - name: Upload AAB Artifact
         uses: actions/upload-artifact@v4
